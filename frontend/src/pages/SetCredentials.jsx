@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import API from "../api";
 
@@ -10,10 +10,13 @@ function SetCredentials()
     const location = useLocation();
     const email = location.state?.email;
 
-    if(!email)
+    useEffect(()=>
     {
-        navigate("/register");
-    }
+        if(!email)
+        {
+            navigate("/register");
+        }
+    },[email,navigate]);
 
     const handleSetCredentials = async (e) => 
     {
@@ -23,7 +26,7 @@ function SetCredentials()
         {
             const response = await API.post("/api/auth/set-credentials", { email, username, password });
 
-            if (response.data.message === "User registered successfully") 
+            if (response.data.message === "User credentials set successfully") 
             {
                 alert("Registration successful! Please log in.");
                 navigate("/login");
@@ -31,7 +34,7 @@ function SetCredentials()
             else
             {
                 alert(response.data.message);
-                navigate("/");
+                navigate("/register");
             }
         } 
         catch (error) 

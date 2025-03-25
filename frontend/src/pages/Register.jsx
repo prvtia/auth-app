@@ -5,10 +5,6 @@ import { useNavigate } from "react-router-dom";
 function Register() 
 {
     const [email, setEmail] = useState("");
-    const [otp, setOtp] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [step, setStep] = useState(1);
     const navigate = useNavigate();
 
     const sendOTP = async (e) => 
@@ -18,7 +14,7 @@ function Register()
         {
             const response = await API.post("/api/otp/send", { email });
             console.log(response.data);
-            setStep(2); // Move to OTP verification step
+            navigate("/verify-otp",{state:{email}});
         } 
         catch (error) 
         {
@@ -26,28 +22,9 @@ function Register()
         }
     };
 
-    const verifyOTP = async (e) => 
-    {
-        e.preventDefault();
-        console.log("Sending OTP verification request with:", { email, otp });
-        try 
-        {
-            const response = await API.post("/api/otp/verify", { email, otp });
-            console.log(response.data);
-            // setStep(3); // Move to set credentials step
-            navigate("/set-credentials",{state:{email}});
-        } 
-        catch (error) 
-        {
-            console.error("OTP verification failed:", error.response.data);
-        }
-    };
-
     return (
         <div>
             <h2>Register</h2>
-
-            {step === 1 && (
                 <form onSubmit={sendOTP}>
                     <input 
                         type="email" 
@@ -58,21 +35,6 @@ function Register()
                     />
                     <button type="submit">Send OTP</button>
                 </form>
-            )}
-
-            {step === 2 && (
-                <form onSubmit={verifyOTP}>
-                    <input 
-                        type="text" 
-                        placeholder="Enter OTP" 
-                        value={otp} 
-                        onChange={(e) => setOtp(e.target.value)} 
-                        required 
-                    />
-                    <button type="submit">Verify OTP</button>
-                </form>
-            )}
-
         </div>
     );
 }

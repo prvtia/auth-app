@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import API from "../api";
 
@@ -8,7 +8,13 @@ function VerifyOTP()
     const navigate = useNavigate();
     const location = useLocation();
     const email = location.state?.email;
-
+    useEffect(()=>
+    {
+        if(!email)
+        {
+            navigate("/register");
+        }
+    },[email,navigate]);
     const handleVerify = async (e) => 
     {
         e.preventDefault();
@@ -17,12 +23,13 @@ function VerifyOTP()
         {
             const response = await API.post("/api/otp/verify", { email, otp });
 
-            if (response.data.message === "OTP verified") 
+            if (response.data.message === "OTP verified successfully") 
             {
                 navigate("/set-credentials", { state: { email } });
             }
             else 
             {
+                console.log(response.data.message);
                 alert("Invalid OTP. Please try again.");
             }
         } 
