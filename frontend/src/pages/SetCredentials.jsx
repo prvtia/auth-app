@@ -10,27 +10,34 @@ function SetCredentials()
     const location = useLocation();
     const email = location.state?.email;
 
+    if(!email)
+    {
+        navigate("/register");
+    }
+
     const handleSetCredentials = async (e) => 
     {
         e.preventDefault();
 
         try 
         {
-            const response = await API.post("/api/auth/register", { email, username, password });
+            const response = await API.post("/api/auth/set-credentials", { email, username, password });
 
             if (response.data.message === "User registered successfully") 
             {
                 alert("Registration successful! Please log in.");
                 navigate("/login");
             }
-            else 
+            else
             {
                 alert(response.data.message);
+                navigate("/");
             }
         } 
         catch (error) 
         {
             alert("Error setting credentials. Please try again.");
+            navigate("/home");
         }
     };
 

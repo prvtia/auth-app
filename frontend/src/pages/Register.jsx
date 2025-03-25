@@ -34,7 +34,8 @@ function Register()
         {
             const response = await API.post("/api/otp/verify", { email, otp });
             console.log(response.data);
-            setStep(3); // Move to set credentials step
+            // setStep(3); // Move to set credentials step
+            navigate("/set-credentials",{state:{email}});
         } 
         catch (error) 
         {
