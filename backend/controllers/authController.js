@@ -12,13 +12,9 @@ const setCredentials = async (req, res) =>
         const existingUser = await User.findOne({ username });
         if (existingUser) return res.status(400).json({ message: "Username already taken" });
 
-        // Hash the password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
         // Directly create the user (no need to check if email exists)
-        const newUser = new User({ email, username, password: hashedPassword });
-        await newUser.save();
+        const newUser = new User({ email, username, password });
+        await newUser.save(); //pre hook in User.js ensures password is hashed using bcrypt before storage 
         res.status(201).json({ message: "User credentials set successfully" });
     } 
     catch (error) 
