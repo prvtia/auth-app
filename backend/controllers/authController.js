@@ -24,7 +24,9 @@ const setCredentials = async (req, res) =>
         }
 
         // Create a new user
-        const newUser = new User({ email, username, password });
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const newUser = new User({ email, username, hashedPassword });
         await newUser.save();
         res.status(201).json({ message: "User credentials set successfully" });
     } 
@@ -57,4 +59,31 @@ const loginUser = async (req, res) =>
     }
 };
 
-module.exports = { setCredentials, loginUser };
+    const resetPassword = async (req, res) =>
+    {
+        const { email, newPassword } = req.body;
+        try
+        {
+            const user = await User.findOne({ email });
+    
+            if (!user)
+            {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(newPassword, salt);
+            user.password = hashedPassword;
+
+            await user.save();
+    
+            res.status(200).json({ message: 'Password reset successful' });
+        }
+        catch (error)
+        {
+            console.log("In error");
+            res.status(500).json({ message: 'Server error', error: error.message });
+        }
+    };
+    
+    module.exports = { setCredentials, loginUser, resetPassword };
+    
