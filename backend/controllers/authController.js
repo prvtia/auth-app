@@ -8,20 +8,33 @@ const setCredentials = async (req, res) =>
     try 
     {
         const { email, username, password } = req.body;
-        // Check if username is already taken
-        const existingUser = await User.findOne({ username });
-        if (existingUser) return res.status(400).json({ message: "Username already taken" });
 
-        // Directly create the user (no need to check if email exists)
+        // Check if the email already exists
+        const existingEmail = await User.findOne({ email });
+        if (existingEmail) 
+        {
+            return res.status(400).json({ message: "Email already registered" });
+        }
+
+        // Check if the username is already taken
+        const existingUser = await User.findOne({ username });
+        if (existingUser) 
+        {
+            return res.status(400).json({ message: "Username already taken" });
+        }
+
+        // Create a new user
         const newUser = new User({ email, username, password });
-        await newUser.save(); //pre hook in User.js ensures password is hashed using bcrypt before storage 
+        await newUser.save();
         res.status(201).json({ message: "User credentials set successfully" });
     } 
     catch (error) 
     {
+        console.error("Error in setCredentials:", error);
         res.status(500).json({ message: "Server Error" });
     }
 };
+    
     
 const loginUser = async (req, res) => 
 {

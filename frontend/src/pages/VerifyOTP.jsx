@@ -7,7 +7,9 @@ function VerifyOTP()
     const [otp, setOtp] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
+    const [errorMessage, setErrorMessage] = useState("");
     const email = location.state?.email;
+
     useEffect(()=>
     {
         if(!email)
@@ -18,6 +20,7 @@ function VerifyOTP()
     const handleVerify = async (e) => 
     {
         e.preventDefault();
+        setErrorMessage("");
 
         try 
         {
@@ -29,13 +32,12 @@ function VerifyOTP()
             }
             else 
             {
-                console.log(response.data.message);
-                alert("Invalid OTP. Please try again.");
+                setErrorMessage(response.data.message);
             }
         } 
         catch (error) 
         {
-            alert("Error verifying OTP. Please try again.");
+            setErrorMessage(error.response?.data?.messgae || "Error verifiying OTP. Please try again.");
         }
     };
 
@@ -52,6 +54,7 @@ function VerifyOTP()
                 />
                 <button type="submit">Verify</button>
             </form>
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         </div>
     );
 }

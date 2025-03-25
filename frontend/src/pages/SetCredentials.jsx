@@ -6,6 +6,7 @@ function SetCredentials()
 {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
     const email = location.state?.email;
@@ -39,14 +40,15 @@ function SetCredentials()
         } 
         catch (error) 
         {
-            alert("Error setting credentials. Please try again.");
-            navigate("/home");
+            alert("Error during registration. Email/username already taken. Please register again")
+            navigate("/register");
         }
     };
 
     return (
         <div>
             <h2>Set Credentials</h2>
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
             <form onSubmit={handleSetCredentials}>
                 <input 
                     type="text" 
