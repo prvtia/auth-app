@@ -43,21 +43,6 @@ function Register()
         }
     };
 
-    const setCredentials = async (e) => 
-    {
-        e.preventDefault();
-        try 
-        {
-            const response = await API.post("/api/auth/set-credentials", { email, username, password });
-            console.log(response.data);
-            navigate("/login"); // Redirect to login
-        } 
-        catch (error) 
-        {
-            console.error("Error setting credentials:", error.response.data);
-        }
-    };
-
     return (
         <div>
             <h2>Register</h2>
@@ -88,25 +73,6 @@ function Register()
                 </form>
             )}
 
-            {step === 3 && (
-                <form onSubmit={setCredentials}>
-                    <input 
-                        type="text" 
-                        placeholder="Username" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
-                        required 
-                    />
-                    <input 
-                        type="password" 
-                        placeholder="Password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        required 
-                    />
-                    <button type="submit">Register</button>
-                </form>
-            )}
         </div>
     );
 }
