@@ -5,6 +5,8 @@ import VerifyOTP from "./pages/VerifyOTP";
 import SetCredentials from "./pages/SetCredentials";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
+import FaceReg from "./pages/faceRegistration";
+import LoggedIn from "./pages/LoggedInPage";
 
 function App() 
 {
@@ -18,6 +20,8 @@ function App()
                 <Route path="/set-credentials" element={<SetCredentials />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/register-with-face" element={<FaceReg/>} />
+                <Route path="/logged-in" element={<LoggedIn/>}/>
             </Routes>
         </Router>
     );
