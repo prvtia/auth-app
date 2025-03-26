@@ -26,7 +26,7 @@ const setCredentials = async (req, res) =>
         // Create a new user
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        const newUser = new User({ email, username, hashedPassword });
+        const newUser = new User({ email, username, password: hashedPassword });
         await newUser.save();
         res.status(201).json({ message: "User credentials set successfully" });
     } 
