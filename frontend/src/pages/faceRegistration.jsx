@@ -14,8 +14,8 @@ const API_URL='http://localhost:5001';
 
 const videoConstraints={
   facingMode: 'user',
-  width:'1280',
-  height:'720'
+  // width:'1280',
+  // height:'720'
 };
 
 export default function FaceReg(){
@@ -34,7 +34,7 @@ export default function FaceReg(){
       const redirectTimer = setTimeout(() => {
         navigate('/logged-in');
         setShouldRedirect(false);
-      }, 4000); 
+      }, 5000); 
       
       return () => clearTimeout(redirectTimer);
     }
@@ -84,20 +84,20 @@ export default function FaceReg(){
   return(
     <ThemeProvider theme={theme}>
     <CssBaseline />
-
-    HII wow
-    <Box sx={{textAlign:'center',p:4}}>
+    <Box sx={{textAlign:'center',width:'100vw',alignContent:'center',justifyContent:'centerz'}}>
       <Typography variant='h3' gutterBottom>
         {mode === 'login' ? 'Face Login' : 'Register Face'}
       </Typography>
-      <Box sx={{ mb: 4, border: '2px solid #1976d2', borderRadius: 2, overflow: 'hidden' }}>
+      <Box sx={{display:'flex',justifyContent:'center' }}>
+      <Box sx={{ border: '3px solid #1976d2', borderRadius: 5,overflow:'hidden',backgroundColor:'black'}}>
         <Webcam
           audio={false}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
-          style={{ width: '100%', maxWidth: 640 }}
+          style={{ width: '100%', maxWidth: 640,maxHeight:690,height:'100%' }}
           />
+      </Box>
       </Box>
       {mode === 'register' && (
         <input

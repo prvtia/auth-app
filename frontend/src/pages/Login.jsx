@@ -24,7 +24,7 @@ function Login()
             // Save token to localStorage
             localStorage.setItem("token", token);
             setSuccessMessage("Login successful! Redirecting...");
-            setTimeout(() => navigate("/"), 3000); // Adjust as needed
+            setTimeout(() => navigate("/logged-in"), 3000); // Adjust as needed
         } 
         catch (error) 
         {
