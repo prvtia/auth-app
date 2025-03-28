@@ -133,7 +133,7 @@ function SetCredentials()
                     onChange={handlePasswordChange} 
                     required 
                 />
-                <ul>
+                <ul style={{listStyleType:"none"}}>
                     <li style={{ color: passwordRules.length ? "green" : "red" }}>
                         {passwordRules.length ? "✅" : "❌"} At least 8 characters
                     </li>
