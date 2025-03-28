@@ -8,6 +8,7 @@ function Login()
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [attemptsLeft, setAttemptsLeft] = useState(3);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => 
@@ -15,6 +16,13 @@ function Login()
         e.preventDefault();
         setErrorMessage("");
         setSuccessMessage("");
+
+        if (attemptsLeft === 0) 
+        {
+            setErrorMessage("Maximum login attempts reached. Redirecting...");
+            setTimeout(() => navigate('/') , 3000);
+            return;
+        }
 
         try 
         {
@@ -30,15 +38,21 @@ function Login()
         {
             if (error.response?.status === 400) 
                 {
-                    const errorMsg = error.response.data.message;
-                    if (errorMsg.includes("Invalid credentials")) 
+                    setAttemptsLeft(prev => 
                     {
-                        setErrorMessage("Invalid credentials! Please try again.");
-                    } 
-                    else 
-                    {
-                        setErrorMessage(errorMsg || "Login failed. Please try again.");
-                    }
+                        if (prev === 1) 
+                        {
+                            setErrorMessage("Maximum login attempts reached. Redirecting...");
+                            setTimeout(() => navigate('/') , 3000);
+                            return 0;
+                        } 
+                        else 
+                        {
+                            setErrorMessage(`Invalid credentials! Attempts left: ${prev - 1}`);
+                            return prev - 1;
+                        }
+                    });
+    
                     setUsername(""); 
                     setPassword(""); 
                 } 
@@ -62,6 +76,7 @@ function Login()
                     value={username} 
                     onChange={(e) => setUsername(e.target.value)} 
                     required 
+                    disabled={attemptsLeft === 0}
                 />
                 <input 
                     type="password" 
@@ -69,8 +84,9 @@ function Login()
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                     required 
+                    disabled={attemptsLeft === 0}
                 />
-                <button type="submit">Login</button>
+                 <button type="submit" disabled={attemptsLeft === 0}>Login</button>
             </form>
         </div>
     );
