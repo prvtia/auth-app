@@ -8,7 +8,7 @@ function VerifyOTP()
     const navigate = useNavigate();
     const location = useLocation();
     const [errorMessage, setErrorMessage] = useState("");
-    const [timer, setTimer] = useState(45); // Countdown timer
+    const [timer, setTimer] = useState(60); // Countdown timer
     const [attempts, setAttempts] = useState(0); // Attempts tracker
     const email = location.state?.email;
 
