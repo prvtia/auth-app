@@ -38,7 +38,7 @@ function SetCredentials()
     const validatePassword = (password) => 
     {
         const rules = {
-            length: password.length >= 8,
+            length: password.length >= 12,
             uppercase: /[A-Z]/.test(password),
             lowercase: /[a-z]/.test(password),
             number: /\d/.test(password),
@@ -135,7 +135,7 @@ function SetCredentials()
                 />
                 <ul style={{listStyleType:"none"}}>
                     <li style={{ color: passwordRules.length ? "green" : "red" }}>
-                        {passwordRules.length ? "✅" : "❌"} At least 8 characters
+                        {passwordRules.length ? "✅" : "❌"} At least 12 characters
                     </li>
                     <li style={{ color: passwordRules.uppercase ? "green" : "red" }}>
                         {passwordRules.uppercase ? "✅" : "❌"} At least one uppercase letter
