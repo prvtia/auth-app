@@ -129,6 +129,7 @@ export default function FaceReg(){
           </Button>
 
         <Button
+          style={{backgroundColor:'black'}}
           variant="outlined"
           size="large"
           onClick={() => {

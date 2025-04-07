@@ -134,10 +134,10 @@ const ForgotPassword = () =>
     };
 
     return (
-        <div>
+        <div className="auth-container">
             <h2>Forgot Password</h2>
-            {message && <div style={{ color: "green" }}>{message}</div>}
-            {error && <div style={{ color: "red" }}>{error}</div>}
+            {message && <div style={{ color: "#6fdc8c" }}>{message}</div>}
+            {error && <div style={{ color: "#f47174" }}>{error}</div>}
 
             {step === 1 && (
                 <div>
@@ -178,19 +178,19 @@ const ForgotPassword = () =>
                         required
                     />
                     <ul style={{listStyle:"none"}}>
-                        <li style={{ color: passwordRules.length ? "green" : "red" }}>
+                        <li style={{ color: passwordRules.length ? "#6fdc8c" : "#f47174" }}>
                             {passwordRules.length ? "✅" : "❌"} At least 12 characters
                         </li>
-                        <li style={{ color: passwordRules.uppercase ? "green" : "red" }}>
+                        <li style={{ color: passwordRules.uppercase ? "#6fdc8c" : "#f47174" }}>
                             {passwordRules.uppercase ? "✅" : "❌"} At least one uppercase letter
                         </li>
-                        <li style={{ color: passwordRules.lowercase ? "green" : "red" }}>
+                        <li style={{ color: passwordRules.lowercase ? "#6fdc8c" : "#f47174" }}>
                             {passwordRules.lowercase ? "✅" : "❌"} At least one lowercase letter
                         </li>
-                        <li style={{ color: passwordRules.number ? "green" : "red" }}>
+                        <li style={{ color: passwordRules.number ? "#6fdc8c" : "#f47174" }}>
                             {passwordRules.number ? "✅" : "❌"} At least one number
                         </li>
-                        <li style={{ color: passwordRules.specialChar ? "green" : "red" }}>
+                        <li style={{ color: passwordRules.specialChar ? "#6fdc8c" : "#f47174" }}>
                             {passwordRules.specialChar ? "✅" : "❌"} At least one special character (@$!%*?&)
                         </li>
                     </ul>

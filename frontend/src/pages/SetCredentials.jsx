@@ -114,10 +114,10 @@ function SetCredentials()
     };
 
     return (
-        <div>
+        <div className="auth-container">
             <h2>Set Credentials</h2>
-            {errorMessage && <div style={{ color: "red", marginBottom: "10px" }}>{errorMessage}</div>}
-            {successMessage && <div style={{ color: "green", marginBottom: "10px" }}>{successMessage}</div>}
+            {errorMessage && <div style={{ color: "#f47174", marginBottom: "10px" }}>{errorMessage}</div>}
+            {successMessage && <div style={{ color: "#6fdc8c", marginBottom: "10px" }}>{successMessage}</div>}
             <form onSubmit={handleSetCredentials}>
                 <input 
                     type="text" 
@@ -134,19 +134,19 @@ function SetCredentials()
                     required 
                 />
                 <ul style={{listStyleType:"none"}}>
-                    <li style={{ color: passwordRules.length ? "green" : "red" }}>
+                    <li style={{ color: passwordRules.length ? "#6fdc8c" : "#f47174" }}>
                         {passwordRules.length ? "✅" : "❌"} At least 12 characters
                     </li>
-                    <li style={{ color: passwordRules.uppercase ? "green" : "red" }}>
+                    <li style={{ color: passwordRules.uppercase ? "#6fdc8c" : "#f47174" }}>
                         {passwordRules.uppercase ? "✅" : "❌"} At least one uppercase letter
                     </li>
-                    <li style={{ color: passwordRules.lowercase ? "green" : "red" }}>
+                    <li style={{ color: passwordRules.lowercase ? "#6fdc8c" : "#f47174" }}>
                         {passwordRules.lowercase ? "✅" : "❌"} At least one lowercase letter
                     </li>
-                    <li style={{ color: passwordRules.number ? "green" : "red" }}>
+                    <li style={{ color: passwordRules.number ? "#6fdc8c" : "#f47174" }}>
                         {passwordRules.number ? "✅" : "❌"} At least one number
                     </li>
-                    <li style={{ color: passwordRules.specialChar ? "green" : "red" }}>
+                    <li style={{ color: passwordRules.specialChar ? "#6fdc8c" : "#f47174" }}>
                         {passwordRules.specialChar ? "✅" : "❌"} At least one special character (@$!%*?&)
                     </li>
                 </ul>

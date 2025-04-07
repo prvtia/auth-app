@@ -65,10 +65,10 @@ function Login()
     };
 
     return (
-        <div>
+        <div className="auth-container">
             <h2>Login</h2>
-            {errorMessage && <div style={{ color: "red", marginBottom: "10px" }}>{errorMessage}</div>}
-            {successMessage && <div style={{ color: "green", marginBottom: "10px" }}>{successMessage}</div>}
+            {errorMessage && <div style={{ color: "#f47174", marginBottom: "10px" }}>{errorMessage}</div>}
+            {successMessage && <div style={{ color: "#6fdc8c", marginBottom: "10px" }}>{successMessage}</div>}
             <form onSubmit={handleLogin}>
                 <input 
                     type="text" 

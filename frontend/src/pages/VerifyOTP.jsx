@@ -79,9 +79,8 @@ function VerifyOTP()
     };
 
     return (
-        <div>
+        <div className="auth-container">
             <h2>Verify OTP</h2>
-            <p>Time remaining: <strong>{timer} seconds</strong></p>
             {/* <p>Attempts left: <strong>{3 - attempts}</strong></p> */}
             <form onSubmit={handleVerify}>
                 <input 
@@ -94,9 +93,10 @@ function VerifyOTP()
                 />
                 <button type="submit">Verify</button>
             </form>
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-            {timer === 0 && <p style={{ color: "blue" }}>OTP expired. Redirecting to registration page...</p>}
-            {attempts >= 3 && <p style={{ color: "blue" }}>Maximum attempts reached. Redirecting to registration page...</p>}
+            <p>Time remaining: <strong>{timer} seconds</strong></p>
+            {errorMessage && <p style={{ color: "#f47174" }}>{errorMessage}</p>}
+            {timer === 0 && <p style={{ color: "#f47174" }}>OTP expired. Redirecting to registration page...</p>}
+            {attempts >= 3 && <p style={{ color: "#f47174" }}>Maximum attempts reached. Redirecting to registration page...</p>}
         </div>
     );
 }
